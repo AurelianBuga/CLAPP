@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/activity_main_screen"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -10,8 +11,24 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.aurelian.cleanerapp.MainScreen">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/top_grid_height"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:background="@color/colorPrimary">
+    </GridLayout>
+
+    <com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
+        android:layout_alignParentBottom="true"
+        android:background="@color/color_bottom_navigation_background"
+        app:itemTextColor="@color/color_bottom_navigation_text"
+        app:menu="@layout/menu_bottom_navigation" />
+
+
+
+
 </RelativeLayout>
