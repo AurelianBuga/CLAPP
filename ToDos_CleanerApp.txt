@@ -1,0 +1,4 @@
+TODO's : 
+- add bottom navigation actions (navigate screen & change color)
+- add 3 circular bars for RAM , Memory and CPU temp
+ 
