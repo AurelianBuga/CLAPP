@@ -16,7 +16,16 @@
         android:layout_height="@dimen/top_grid_height"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:background="@color/colorPrimary">
+        android:background="@color/colorPrimary"
+        android:id="@+id/gridLayout">
+
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginStart="115dp"
+            android:id="@+id/MemoryArc" />
+
     </GridLayout>
 
     <com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx
