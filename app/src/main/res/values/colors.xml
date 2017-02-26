@@ -8,4 +8,5 @@
     <color name="color_bottom_navigation_text">#47525e</color>
     <color name="color_bottom_navigation_selected_tab">#47525e</color>
     <color name="color_bottom_navigation_unselected_tab">#47525e</color>
+    <color name="color_description_arc">#FFFFFF</color>
 </resources>

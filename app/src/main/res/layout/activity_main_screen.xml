@@ -11,22 +11,6 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.aurelian.cleanerapp.MainScreen">
 
-    <GridLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/top_grid_height"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:background="@color/colorPrimary"
-        android:id="@+id/gridLayout">
-
-        <ImageView
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_marginTop="1dp"
-            android:layout_marginStart="115dp"
-            android:id="@+id/MemoryArc" />
-
-    </GridLayout>
 
     <com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx
         android:id="@+id/bottom_navigation"
@@ -37,7 +21,73 @@
         app:itemTextColor="@color/color_bottom_navigation_text"
         app:menu="@layout/menu_bottom_navigation" />
 
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/top_grid_height"
+        android:background="@color/colorPrimary"
+        android:id="@+id/gridLayout"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
 
+        <ImageView
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="250dp"
+            android:id="@+id/StorageArc">
+
+        </ImageView>
+
+
+        <ImageView
+            android:layout_width="180dp"
+            android:layout_height="180dp"
+            android:layout_marginTop="0dp"
+            android:id="@+id/MemoryArc"
+            android:layout_marginStart="-275dp"
+            android:layout_marginEnd="0dp" />
+
+        <ImageView
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            app:srcCompat="@color/colorPrimary"
+            android:id="@+id/CpuTempArc"
+            android:layout_marginTop="30dp"
+            android:layout_marginStart="-26dp"/>
+
+        <TextView
+            android:text="Storage"
+            android:layout_width="85dp"
+            android:layout_height="36dp"
+            android:id="@+id/storage"
+            android:layout_marginTop="180dp"
+            android:layout_marginStart="-355dp"
+            android:textSize="20sp"
+            android:textColor="@color/color_description_arc"/>
+
+        <TextView
+            android:text="Memory"
+            android:layout_width="109dp"
+            android:layout_height="49dp"
+            android:id="@+id/memory"
+            android:layout_marginTop="190dp"
+            android:layout_marginStart="35dp"
+            android:textSize="25sp"
+            android:textColor="@color/color_description_arc"/>
+
+        <TextView
+            android:text="CPU"
+            android:layout_width="109dp"
+            android:layout_height="49dp"
+            android:id="@+id/cpuTemp"
+            android:layout_marginTop="180dp"
+            android:layout_marginStart="50dp"
+            android:textSize="20sp"
+            android:textColor="@color/color_description_arc"/>
+
+
+    </GridLayout>
 
 
 </RelativeLayout>

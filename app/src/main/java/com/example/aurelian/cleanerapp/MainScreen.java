@@ -10,10 +10,18 @@ import android.graphics.RectF;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.Window;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
@@ -64,18 +72,56 @@ public class MainScreen extends AppCompatActivity {
         // binding with ViewPager
         bind.bnve.setupWithViewPager(bind.vp);*/
 
+        //draw memory arc
         ImageView memoryArc = (ImageView) findViewById(R.id.MemoryArc);
-        double percente = 100.0;
-        memoryArc.setImageBitmap(getMemoryArcBtm(this , percente));
+        double percente = 10.0;
+        memoryArc.setImageBitmap(getArcBitmap(this , percente , 180 , 180 , 12 , 5 ,
+                Color.argb(255, 100, 211, 219) , Color.WHITE , 135.0 , 272.0));
+        memoryArc.setAlpha((float)1.0);
+
+        //draw storage arc
+        ImageView storageArc = (ImageView) findViewById(R.id.StorageArc);
+        percente = 80.0;
+        storageArc.setImageBitmap(getArcBitmap(this , percente , 120 , 120 , 7 , 3 ,
+                Color.argb(255, 100, 211, 219) , Color.WHITE  , 90.0 , 220.0));
+        storageArc.setAlpha((float)1.0);
+
+        //Draw Cpu Temp Arc
+        ImageView cpuTempArc = (ImageView) findViewById(R.id.CpuTempArc);
+        percente = 80.0;
+        cpuTempArc.setImageBitmap(getArcBitmap(this , percente , 120 , 120 , 7 , 3 ,
+                Color.argb(255, 100, 211, 219) , Color.WHITE  , 90.0 , -220.0));
+
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayShowHomeEnabled(false);
+        actionBar.setDisplayShowTitleEnabled(false);
+        LayoutInflater mInflater = LayoutInflater.from(this);
+
+        View mCustomView = mInflater.inflate(R.layout.custom_action_bar, null);
+        TextView mTitleTextView = (TextView) mCustomView.findViewById(R.id.title_text);
+        mTitleTextView.setText("CLEANER APP");
+
+        ImageButton imageButton = (ImageButton) mCustomView
+                .findViewById(R.id.imageButton);
+        imageButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                //TODO : make action -> go to game booster activity
+            }
+        });
+
+        actionBar.setCustomView(mCustomView);
+        actionBar.setDisplayShowCustomEnabled(true);
+
 
     }
 
-    private Bitmap getMemoryArcBtm(Context context, double percentage) {
+    private Bitmap getArcBitmap(Context context, double percentage , int width , int height ,
+                                    int stroke , int padding , int backgroundColor , int arcColor ,
+                                     double startAngle , double maxAngle) {
 
-        int width = 400;
-        int height = 400;
-        int stroke = 30;
-        int padding = 5;
         float density = context.getResources().getDisplayMetrics().density;
 
         //Paint for arc stroke.
@@ -90,13 +136,13 @@ public class MainScreen extends AppCompatActivity {
         Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(bitmap);
         //First draw full arc as background.
-        paint.setColor(Color.argb(75, 255, 255, 255));
+        paint.setColor(backgroundColor);
 
-        double endAngle = (272.0 / 100.0 * percentage);
-        canvas.drawArc(arc, 135, 272, false, paint);
+        double endAngle = (maxAngle / 100.0 * percentage);
+        canvas.drawArc(arc, (float)startAngle, (float)maxAngle, false, paint);
         //Then draw arc progress with actual value.
-        paint.setColor(Color.WHITE);
-        canvas.drawArc(arc, 135, (float)endAngle, false, paint);
+        paint.setColor(arcColor);
+        canvas.drawArc(arc, (float)startAngle, (float)endAngle, false, paint);
 
         return  bitmap;
     }

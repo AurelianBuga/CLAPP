@@ -2,6 +2,6 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">0dp</dimen>
     <dimen name="activity_vertical_margin">0dp</dimen>
-    <dimen name="top_grid_height">220dp</dimen>
+    <dimen name="top_grid_height">250dp</dimen>
     <dimen name="bottom_menu_height">40dp</dimen>
 </resources>
