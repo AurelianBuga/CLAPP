@@ -3,4 +3,5 @@
     <string name="home_tab_title">Home</string>
     <string name="all_tools_tab_title">All tools</string>
     <string name="settings_tab_title">Settings</string>
+    <string name="test_value_arc">00</string>
 </resources>
