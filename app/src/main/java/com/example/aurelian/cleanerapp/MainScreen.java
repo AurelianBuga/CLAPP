@@ -25,6 +25,8 @@ import android.widget.Toast;
 
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
+import org.w3c.dom.Text;
+
 import static android.R.attr.tint;
 
 
@@ -115,6 +117,12 @@ public class MainScreen extends AppCompatActivity {
         actionBar.setCustomView(mCustomView);
         actionBar.setDisplayShowCustomEnabled(true);
 
+        setPercenteStorageArc(15);
+                setPercenteMemoryArc(50);
+        setCpuTempArc(34);
+                setStorageReport(15.25 , 56.11);
+        setMemoryReport(82.44 , 57.45);
+                setCpuTempStatus("GOOD");
 
     }
 
@@ -145,5 +153,43 @@ public class MainScreen extends AppCompatActivity {
         canvas.drawArc(arc, (float)startAngle, (float)endAngle, false, paint);
 
         return  bitmap;
+    }
+
+    public void setPercenteStorageArc(int percente)
+    {
+        TextView percenteStorageArc = (TextView) findViewById(R.id.percenteStorageArc);
+        percenteStorageArc.setText(String.valueOf(percente));
+    }
+
+    public void setPercenteMemoryArc(int percente)
+    {
+        TextView percenteMemoryArc = (TextView) findViewById(R.id.percenteMemoryArc);
+        percenteMemoryArc.setText(String.valueOf(percente));
+    }
+
+    public void setCpuTempArc(int temp)
+    {
+        TextView cpuTempArc = (TextView) findViewById(R.id.cpuTempArc);
+        cpuTempArc.setText(String.valueOf(temp));
+    }
+
+    public void setStorageReport(double firstParam , double secondParam)
+    {
+        TextView storageReport = (TextView) findViewById(R.id.storageReport);
+        String fullReport = firstParam + "/" + secondParam + "GB";
+        storageReport.setText(fullReport);
+    }
+
+    public void setMemoryReport(double firstParam , double secondParam)
+    {
+        TextView memoryReport = (TextView) findViewById(R.id.memoryReport);
+        String fullReport = firstParam + "/" + secondParam + "GB";
+        memoryReport.setText(fullReport);
+    }
+
+    public void setCpuTempStatus(String status)
+    {
+        TextView cpuTempStatus = (TextView) findViewById(R.id.cpuTempStatus);
+        cpuTempStatus.setText(status);
     }
 }
