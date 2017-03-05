@@ -117,12 +117,13 @@ public class MainScreen extends AppCompatActivity {
         actionBar.setCustomView(mCustomView);
         actionBar.setDisplayShowCustomEnabled(true);
 
-        setPercenteStorageArc(15);
-                setPercenteMemoryArc(50);
+        //for testing purposes
+        /*setPercenteStorageArc(15);
+        setPercenteMemoryArc(50);
         setCpuTempArc(34);
-                setStorageReport(15.25 , 56.11);
+        setStorageReport(15.25 , 56.11);
         setMemoryReport(82.44 , 57.45);
-                setCpuTempStatus("GOOD");
+        setCpuTempStatus("GOOD");*/
 
     }
 
@@ -155,7 +156,7 @@ public class MainScreen extends AppCompatActivity {
         return  bitmap;
     }
 
-    public void setPercenteStorageArc(int percente)
+    /*public void setPercenteStorageArc(int percente)
     {
         TextView percenteStorageArc = (TextView) findViewById(R.id.percenteStorageArc);
         percenteStorageArc.setText(String.valueOf(percente));
@@ -191,5 +192,5 @@ public class MainScreen extends AppCompatActivity {
     {
         TextView cpuTempStatus = (TextView) findViewById(R.id.cpuTempStatus);
         cpuTempStatus.setText(status);
-    }
+    }*/
 }
