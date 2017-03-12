@@ -77,21 +77,21 @@ public class MainScreen extends AppCompatActivity {
         //draw memory arc
         ImageView memoryArc = (ImageView) findViewById(R.id.MemoryArc);
         double percente = 10.0;
-        memoryArc.setImageBitmap(getArcBitmap(this , percente , 180 , 180 , 12 , 5 ,
+        memoryArc.setImageBitmap(getArcBitmap(this , percente , 500 , 500 , 20 , 5 ,
                 Color.argb(255, 100, 211, 219) , Color.WHITE , 135.0 , 272.0));
         memoryArc.setAlpha((float)1.0);
 
         //draw storage arc
         ImageView storageArc = (ImageView) findViewById(R.id.StorageArc);
         percente = 80.0;
-        storageArc.setImageBitmap(getArcBitmap(this , percente , 130 , 130 , 7 , 3 ,
+        storageArc.setImageBitmap(getArcBitmap(this , percente , 350 , 350 , 10 , 3 ,
                 Color.argb(255, 100, 211, 219) , Color.WHITE  , 90.0 , 220.0));
         storageArc.setAlpha((float)1.0);
 
         //Draw Cpu Temp Arc
         ImageView cpuTempArc = (ImageView) findViewById(R.id.CpuTempArc);
         percente = 80.0;
-        cpuTempArc.setImageBitmap(getArcBitmap(this , percente , 130 , 130 , 7 , 3 ,
+        cpuTempArc.setImageBitmap(getArcBitmap(this , percente , 350 , 350 , 10 , 3 ,
                 Color.argb(255, 100, 211, 219) , Color.WHITE  , 90.0 , -220.0));
 
 
