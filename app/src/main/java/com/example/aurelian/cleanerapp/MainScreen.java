@@ -1,12 +1,14 @@
 package com.example.aurelian.cleanerapp;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
+import android.media.Image;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.view.ViewPager;
@@ -18,6 +20,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -66,9 +69,59 @@ public class MainScreen extends AppCompatActivity {
                     }
                 });
 
-        /*Binding for ViewPager -> swipe screen
+        final ImageButton junkCleanerButton = (ImageButton)findViewById(R.id.JunkCleaner);
+        final ImageButton phoneBoosterButton = (ImageButton)findViewById(R.id.PhoneBooster);
+        final ImageButton batterySaverButton = (ImageButton)findViewById(R.id.BatterySaver);
+        final ImageButton antivirusButton = (ImageButton)findViewById(R.id.Antivirus);
+
+        junkCleanerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                v.startAnimation(AnimationUtils.loadAnimation(MainScreen.this, R.anim.main_screen_anim_onclick));
+                Intent myIntent = new Intent(MainScreen.this, JunkCleanerScreen.class);
+                //myIntent.putExtra("key", value); //Optional parameters
+                MainScreen.this.startActivity(myIntent);
+                overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+            }
+        });
+
+        phoneBoosterButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                v.startAnimation(AnimationUtils.loadAnimation(MainScreen.this, R.anim.main_screen_anim_onclick));
+                Intent myIntent = new Intent(MainScreen.this, PhoneBoosterScreen.class);
+                //myIntent.putExtra("key", value); //Optional parameters
+                MainScreen.this.startActivity(myIntent);
+                overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+
+            }
+        });
+
+        batterySaverButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                v.startAnimation(AnimationUtils.loadAnimation(MainScreen.this, R.anim.main_screen_anim_onclick));
+                Intent myIntent = new Intent(MainScreen.this, BatterySaverScreen.class);
+                //myIntent.putExtra("key", value); //Optional parameters
+                MainScreen.this.startActivity(myIntent);
+                overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+            }
+        });
+
+        antivirusButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                v.startAnimation(AnimationUtils.loadAnimation(MainScreen.this, R.anim.main_screen_anim_onclick));
+                Intent myIntent = new Intent(MainScreen.this, AntivirusScreen.class);
+                //myIntent.putExtra("key", value); //Optional parameters
+                MainScreen.this.startActivity(myIntent);
+                overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+            }
+        });
+
+        //Binding for ViewPager -> swipe screen
         // set adapter
-        adapter = new VpAdapter(getSupportFragmentManager(), fragments);
+        /*VpAdapter adapter = new VpAdapter(getSupportFragmentManager(), fragments);
         bind.vp.setAdapter(adapter);
 
         // binding with ViewPager
@@ -156,7 +209,7 @@ public class MainScreen extends AppCompatActivity {
         return  bitmap;
     }
 
-    /*public void setPercenteStorageArc(int percente)
+    public void setPercenteStorageArc(int percente)
     {
         TextView percenteStorageArc = (TextView) findViewById(R.id.percenteStorageArc);
         percenteStorageArc.setText(String.valueOf(percente));
@@ -192,5 +245,7 @@ public class MainScreen extends AppCompatActivity {
     {
         TextView cpuTempStatus = (TextView) findViewById(R.id.cpuTempStatus);
         cpuTempStatus.setText(status);
-    }*/
+    }
+
+
 }
