@@ -11,6 +11,9 @@ import android.graphics.RectF;
 import android.media.Image;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -30,6 +33,10 @@ import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Vector;
+
 import static android.R.attr.tint;
 
 
@@ -41,9 +48,16 @@ public class MainScreen extends AppCompatActivity {
         getSupportActionBar().setElevation(0);
         setContentView(R.layout.activity_main_screen);
 
+        ViewPager pager = (ViewPager) findViewById(R.id.ViewPager);
+        pager.setAdapter(new PageAdapterMainScreen(getSupportFragmentManager()));
+
+
         //Initializing the bottomNavigationView
         final BottomNavigationViewEx bottomNavigationView;
         bottomNavigationView = (BottomNavigationViewEx) findViewById(R.id.bottom_navigation);
+
+        //Binding for ViewPager -> swipe screen
+        bottomNavigationView.setupWithViewPager(pager);
 
         //Disable animation of bottomNavigationView
         bottomNavigationView.enableAnimation(false);
@@ -69,7 +83,7 @@ public class MainScreen extends AppCompatActivity {
                     }
                 });
 
-        final ImageButton junkCleanerButton = (ImageButton)findViewById(R.id.JunkCleaner);
+        /*final ImageButton junkCleanerButton = (ImageButton)findViewById(R.id.JunkCleaner);
         final ImageButton phoneBoosterButton = (ImageButton)findViewById(R.id.PhoneBooster);
         final ImageButton batterySaverButton = (ImageButton)findViewById(R.id.BatterySaver);
         final ImageButton antivirusButton = (ImageButton)findViewById(R.id.Antivirus);
@@ -117,18 +131,12 @@ public class MainScreen extends AppCompatActivity {
                 MainScreen.this.startActivity(myIntent);
                 overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
             }
-        });
+        });*/
 
-        //Binding for ViewPager -> swipe screen
-        // set adapter
-        /*VpAdapter adapter = new VpAdapter(getSupportFragmentManager(), fragments);
-        bind.vp.setAdapter(adapter);
 
-        // binding with ViewPager
-        bind.bnve.setupWithViewPager(bind.vp);*/
 
         //draw memory arc
-        ImageView memoryArc = (ImageView) findViewById(R.id.MemoryArc);
+        /*ImageView memoryArc = (ImageView) findViewById(R.id.MemoryArc);
         double percente = 10.0;
         memoryArc.setImageBitmap(getArcBitmap(this , percente , 500 , 500 , 20 , 5 ,
                 Color.argb(255, 100, 211, 219) , Color.WHITE , 135.0 , 272.0));
@@ -178,6 +186,7 @@ public class MainScreen extends AppCompatActivity {
         setMemoryReport(82.44 , 57.45);
         setCpuTempStatus("GOOD");*/
 
+
     }
 
     private Bitmap getArcBitmap(Context context, double percentage , int width , int height ,
@@ -209,7 +218,7 @@ public class MainScreen extends AppCompatActivity {
         return  bitmap;
     }
 
-    public void setPercenteStorageArc(int percente)
+    /*public void setPercenteStorageArc(int percente)
     {
         TextView percenteStorageArc = (TextView) findViewById(R.id.percenteStorageArc);
         percenteStorageArc.setText(String.valueOf(percente));
@@ -245,7 +254,8 @@ public class MainScreen extends AppCompatActivity {
     {
         TextView cpuTempStatus = (TextView) findViewById(R.id.cpuTempStatus);
         cpuTempStatus.setText(status);
-    }
+    }*/
+
 
 
 }
