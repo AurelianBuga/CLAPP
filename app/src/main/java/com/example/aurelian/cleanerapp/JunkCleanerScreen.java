@@ -10,4 +10,10 @@ public class JunkCleanerScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_junk_cleaner_screen);
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.slide_in_back, R.anim.slide_out_back);
+    }
 }

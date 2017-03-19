@@ -26,8 +26,9 @@
         <activity
             android:name=".BatterySaverScreen"
             android:label="Battery Saver" />
-
-        <activity android:name=".AntivirusScreen" android:label="Antivirus"></activity>
+        <activity
+            android:name=".AntivirusScreen"
+            android:label="Antivirus" />
 
         <!--
  ATTENTION: This was auto-generated to add Google Play services to your project for
@@ -37,7 +38,7 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-
+        <activity android:name=".GameBoosterScreen"></activity>
     </application>
 
 </manifest>

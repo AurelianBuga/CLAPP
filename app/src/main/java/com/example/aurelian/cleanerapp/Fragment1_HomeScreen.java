@@ -115,7 +115,7 @@ public class Fragment1_HomeScreen extends Fragment {
                 Color.argb(255, 100, 211, 219) , Color.WHITE  , 90.0 , -220.0));
 
 
-        ActionBar actionBar = ((AppCompatActivity)getActivity()).getSupportActionBar();
+        /*ActionBar actionBar = ((AppCompatActivity)getActivity()).getSupportActionBar();
         actionBar.setDisplayShowHomeEnabled(false);
         actionBar.setDisplayShowTitleEnabled(false);
         LayoutInflater mInflater = LayoutInflater.from(getActivity());
@@ -135,7 +135,7 @@ public class Fragment1_HomeScreen extends Fragment {
         });
 
         actionBar.setCustomView(mCustomView);
-        actionBar.setDisplayShowCustomEnabled(true);
+        actionBar.setDisplayShowCustomEnabled(true);*/
 
         //for testing purposes
         /*setPercenteStorageArc(15);

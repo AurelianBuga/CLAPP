@@ -40,7 +40,7 @@ import java.util.Vector;
 import static android.R.attr.tint;
 
 
-public class MainScreen extends AppCompatActivity {
+public class MainScreen extends AppCompatActivity  {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +50,54 @@ public class MainScreen extends AppCompatActivity {
 
         ViewPager pager = (ViewPager) findViewById(R.id.ViewPager);
         pager.setAdapter(new PageAdapterMainScreen(getSupportFragmentManager()));
+        pager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                ActionBar actionBar = getSupportActionBar();
+                actionBar.setDisplayShowHomeEnabled(false);
+                actionBar.setDisplayShowTitleEnabled(false);
+                LayoutInflater mInflater = LayoutInflater.from(MainScreen.this);
+
+                View mCustomView = mInflater.inflate(R.layout.custom_action_bar, null);
+                TextView mTitleTextView = (TextView) mCustomView.findViewById(R.id.title_text);
+                //mTitleTextView.setText("CLEANER APP");
+                if(position == 0)
+                    mTitleTextView.setText("CLEANER APP");
+                else
+                    if(position == 1)
+                        mTitleTextView.setText("ALL TOOLS");
+                else
+                    if(position == 2)
+                        mTitleTextView.setText("SETTINGS");
+
+                ImageButton imageButton = (ImageButton) mCustomView
+                        .findViewById(R.id.imageButton);
+                imageButton.setOnClickListener(new View.OnClickListener() {
+
+                    @Override
+                    public void onClick(View view) {
+                        Intent myIntent = new Intent(MainScreen.this, GameBoosterScreen.class);
+                        //myIntent.putExtra("key", value); //Optional parameters
+                        startActivity(myIntent);
+                        overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+                    }
+                });
+
+                actionBar.setCustomView(mCustomView);
+                actionBar.setDisplayShowCustomEnabled(true);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
 
 
         //Initializing the bottomNavigationView
@@ -255,7 +303,6 @@ public class MainScreen extends AppCompatActivity {
         TextView cpuTempStatus = (TextView) findViewById(R.id.cpuTempStatus);
         cpuTempStatus.setText(status);
     }*/
-
 
 
 }

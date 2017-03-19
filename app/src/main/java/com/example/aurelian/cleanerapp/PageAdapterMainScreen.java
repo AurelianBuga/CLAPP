@@ -3,6 +3,7 @@ package com.example.aurelian.cleanerapp;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +12,7 @@ import java.util.List;
  * Created by Aurelian on 3/15/2017.
  */
 
-public class PageAdapterMainScreen extends FragmentPagerAdapter {
+public class PageAdapterMainScreen extends FragmentPagerAdapter{
 
     private List<Fragment> fragments;
 
@@ -34,20 +35,5 @@ public class PageAdapterMainScreen extends FragmentPagerAdapter {
     public int getCount()
     {
         return this.fragments.size();
-    }
-
-    @Override
-    public CharSequence getPageTitle(int index)
-    {
-        switch (index){
-            case 0:
-                return "000000";
-            case 1:
-                return "111111";
-            case 2:
-                return "22222";
-            default:
-                return "default";
-        }
     }
 }
