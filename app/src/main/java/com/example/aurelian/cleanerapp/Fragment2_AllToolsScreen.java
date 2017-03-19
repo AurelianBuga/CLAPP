@@ -21,6 +21,9 @@ public class Fragment2_AllToolsScreen extends Fragment {
         if(container == null)
             return null;
 
+        //to avoid refreshing fragments
+        setRetainInstance(true);
+
         return inflater.inflate(R.layout.fragment2_all_tools_screen , container , false);
     }
 

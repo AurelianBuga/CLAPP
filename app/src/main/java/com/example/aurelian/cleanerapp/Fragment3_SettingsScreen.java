@@ -18,6 +18,9 @@ public class Fragment3_SettingsScreen extends Fragment {
         if(container == null)
             return null;
 
+        //to avoid refreshing fragments
+        setRetainInstance(true);
+
         return inflater.inflate(R.layout.fragment3_settings_screen, container , false);
     }
 }

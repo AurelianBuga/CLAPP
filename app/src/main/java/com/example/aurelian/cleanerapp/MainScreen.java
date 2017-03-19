@@ -15,6 +15,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v4.view.animation.LinearOutSlowInInterpolator;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -24,6 +25,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.animation.AnimationUtils;
+import android.view.animation.DecelerateInterpolator;
+import android.view.animation.Interpolator;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -33,14 +36,17 @@ import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
 import org.w3c.dom.Text;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
-
 import static android.R.attr.tint;
 
 
 public class MainScreen extends AppCompatActivity  {
+
+    private CustomScroller customScroller;
+    private ViewPager pager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +54,9 @@ public class MainScreen extends AppCompatActivity  {
         getSupportActionBar().setElevation(0);
         setContentView(R.layout.activity_main_screen);
 
-        ViewPager pager = (ViewPager) findViewById(R.id.ViewPager);
+        pager = (ViewPager) findViewById(R.id.ViewPager);
+        //to avoid refreshing fragments
+        pager.setOffscreenPageLimit(3);
         pager.setAdapter(new PageAdapterMainScreen(getSupportFragmentManager()));
         pager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -100,6 +108,7 @@ public class MainScreen extends AppCompatActivity  {
         });
 
 
+
         //Initializing the bottomNavigationView
         final BottomNavigationViewEx bottomNavigationView;
         bottomNavigationView = (BottomNavigationViewEx) findViewById(R.id.bottom_navigation);
@@ -130,6 +139,8 @@ public class MainScreen extends AppCompatActivity  {
                         return true;
                     }
                 });
+
+        setCustomScrollerToViewPager(new LinearOutSlowInInterpolator() , 400);
 
         /*final ImageButton junkCleanerButton = (ImageButton)findViewById(R.id.JunkCleaner);
         final ImageButton phoneBoosterButton = (ImageButton)findViewById(R.id.PhoneBooster);
@@ -303,6 +314,19 @@ public class MainScreen extends AppCompatActivity  {
         TextView cpuTempStatus = (TextView) findViewById(R.id.cpuTempStatus);
         cpuTempStatus.setText(status);
     }*/
+
+    private void setCustomScrollerToViewPager(Interpolator interpolator, int duration) {
+        try {
+            customScroller = new CustomScroller(this, interpolator, duration);
+            Field mScroller = ViewPager.class.getDeclaredField("mScroller");
+            mScroller.setAccessible(true);
+            mScroller.set(pager, customScroller);
+        } catch (NoSuchFieldException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+    }
 
 
 }
