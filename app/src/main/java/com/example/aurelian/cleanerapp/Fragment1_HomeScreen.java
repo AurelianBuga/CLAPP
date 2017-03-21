@@ -1,6 +1,6 @@
 package com.example.aurelian.cleanerapp;
 
-
+import android.app.ActivityManager;
 import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
@@ -9,9 +9,15 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
+import android.hardware.Sensor;
+import android.hardware.SensorManager;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.os.Bundle;
@@ -20,7 +26,9 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import static com.example.aurelian.cleanerapp.R.id.cpuTempArc;
+import static android.content.Context.ACTIVITY_SERVICE;
+import static android.content.Context.SENSOR_SERVICE;
+
 
 /**
  * Created by Aurelian on 3/15/2017.
@@ -37,16 +45,22 @@ public class Fragment1_HomeScreen extends Fragment {
 
     private long usedStorage;
     private long totalStorage;
+    private long usedMemory;
+    private long totalMemory;
+    private float cpuTemp;
 
     private ImageView memoryArc;
     private ImageView storageArc;
     private ImageView cpuTempArc;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater , ViewGroup container , Bundle savedInstanceState)
     {
         if(container == null)
             return null;
+
+        setHasOptionsMenu(true);
 
         //to avoid refreshing fragments
         setRetainInstance(true);
@@ -104,9 +118,22 @@ public class Fragment1_HomeScreen extends Fragment {
             }
         });
 
-        SetMemoryPercente(50.0);
-        SetStoragePercente(50.0);
-        SetCpuTempPercente(50.0);
+        usedStorage = StorageManager.phone_storage_used();
+        totalStorage = StorageManager.phone_storage_total();
+        setStorageReport(Converter.bytesToHuman(usedStorage , false) ,
+                Converter.bytesToHuman(totalStorage , true));
+
+        usedMemory = MemoryManager.GetUsedMemory(getActivity());
+        totalMemory = MemoryManager.GetTotalMemory(getActivity());
+        setMemoryReport(Converter.bytesToHuman( usedMemory, false) ,
+                Converter.bytesToHuman(totalMemory , true));
+
+        CPUManager cpuManager = new CPUManager();
+        cpuTemp = cpuManager.getCurrentCPUTemperature();
+
+        SetMemoryPercente((double)usedMemory / totalMemory * 100);
+        SetStoragePercente((double)usedStorage / totalStorage * 100);
+        SetCpuTempPercente(cpuTemp);
 
         //draw memory arc
         memoryArc = (ImageView) view.findViewById(R.id.MemoryArc);
@@ -124,9 +151,6 @@ public class Fragment1_HomeScreen extends Fragment {
         cpuTempArc = (ImageView) view.findViewById(R.id.CpuTempArc);
         cpuTempArc.setImageBitmap(getArcBitmap(getActivity() , ((cpuTempPercente - 20.0) > 0.0)? (cpuTempPercente - 20.0) : 0 , 350 , 350 , 10 , 3 ,
                 Color.argb(255, 100, 211, 219) , Color.WHITE  , 90.0 , -220.0));
-
-        usedStorage = StorageManager.phone_storage_used();
-        totalStorage = StorageManager.phone_storage_total();
 
         /*ActionBar actionBar = ((AppCompatActivity)getActivity()).getSupportActionBar();
         actionBar.setDisplayShowHomeEnabled(false);
@@ -160,6 +184,7 @@ public class Fragment1_HomeScreen extends Fragment {
 
         return view;
     }
+
 
     private Bitmap getArcBitmap(Context context, double percentage , int width , int height ,
                                 int stroke , int padding , int backgroundColor , int arcColor ,
@@ -208,17 +233,17 @@ public class Fragment1_HomeScreen extends Fragment {
         cpuTempArc.setText(String.valueOf(temp));
     }
 
-    public void setStorageReport(double firstParam , double secondParam)
+    public void setStorageReport(String firstParam , String secondParam)
     {
         TextView storageReport = (TextView) view.findViewById(R.id.storageReport);
-        String fullReport = firstParam + "/" + secondParam + "GB";
+        String fullReport = firstParam + "/" + secondParam;
         storageReport.setText(fullReport);
     }
 
-    public void setMemoryReport(double firstParam , double secondParam)
+    public void setMemoryReport(String firstParam , String secondParam)
     {
         TextView memoryReport = (TextView) view.findViewById(R.id.memoryReport);
-        String fullReport = firstParam + "/" + secondParam + "GB";
+        String fullReport = firstParam + "/" + secondParam;
         memoryReport.setText(fullReport);
     }
 

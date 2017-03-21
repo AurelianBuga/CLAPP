@@ -27,58 +27,105 @@ public class MainScreen extends AppCompatActivity  {
 
     private CustomScroller customScroller;
     private ViewPager pager;
+    private View CustomActionBar_Home;
+    private View CustomActionBar_Tools;
+    private View CustomActionBar_Settings;
+    private ActionBar actionBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getSupportActionBar().setElevation(0);
+        //getSupportActionBar().setElevation(0);
         setContentView(R.layout.activity_main_screen);
 
         pager = (ViewPager) findViewById(R.id.ViewPager);
         //to avoid refreshing fragments
         pager.setOffscreenPageLimit(3);
         pager.setAdapter(new PageAdapterMainScreen(getSupportFragmentManager()));
+
+        LayoutInflater mInflater = LayoutInflater.from(MainScreen.this);
+        CustomActionBar_Home = mInflater.inflate(R.layout.main_screen_action_bar, null);
+        TextView  mTitleTextView = (TextView) CustomActionBar_Home.findViewById(R.id.title_text);
+        mTitleTextView.setText("CLEANER APP");
+        ImageButton imageButton = (ImageButton) CustomActionBar_Home
+                .findViewById(R.id.imageButton);
+        imageButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                Intent myIntent = new Intent(MainScreen.this, GameBoosterScreen.class);
+                //myIntent.putExtra("key", value); //Optional parameters
+                startActivity(myIntent);
+                overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+            }
+        });
+
+        //    VEZI DACA POT EXISTA MAI MULTE ACIION BAR-URI PT FIECARE FRAGMENT
+
+
+        /*actionBar = getSupportActionBar();
+        actionBar.setDisplayShowHomeEnabled(false);
+        actionBar.setDisplayShowTitleEnabled(false);
+        actionBar.setCustomView(CustomActionBar_Home);
+        actionBar.setDisplayShowCustomEnabled(true);*/
+
         pager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-
+                CustomActionBar_Home.setX(-positionOffsetPixels+10);
+                //actionBar.setCustomView(CustomActionBar_Home);
             }
 
             @Override
             public void onPageSelected(int position) {
-                ActionBar actionBar = getSupportActionBar();
-                actionBar.setDisplayShowHomeEnabled(false);
-                actionBar.setDisplayShowTitleEnabled(false);
+                //actionBar = getSupportActionBar();
+                //actionBar.setDisplayShowHomeEnabled(false);
+                //actionBar.setDisplayShowTitleEnabled(false);
                 LayoutInflater mInflater = LayoutInflater.from(MainScreen.this);
 
-                View mCustomView = mInflater.inflate(R.layout.custom_action_bar, null);
-                TextView mTitleTextView = (TextView) mCustomView.findViewById(R.id.title_text);
+                TextView mTitleTextView;
                 //mTitleTextView.setText("CLEANER APP");
                 if(position == 0)
+                {
+                    CustomActionBar_Home = mInflater.inflate(R.layout.main_screen_action_bar, null);
+                    mTitleTextView = (TextView) CustomActionBar_Home.findViewById(R.id.title_text);
                     mTitleTextView.setText("CLEANER APP");
+                    ImageButton imageButton = (ImageButton) CustomActionBar_Home
+                            .findViewById(R.id.imageButton);
+                    imageButton.setOnClickListener(new View.OnClickListener() {
+
+                        @Override
+                        public void onClick(View view) {
+                            Intent myIntent = new Intent(MainScreen.this, GameBoosterScreen.class);
+                            //myIntent.putExtra("key", value); //Optional parameters
+                            startActivity(myIntent);
+                            overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+                        }
+                    });
+                }
+
                 else
                     if(position == 1)
+                    {
+                        CustomActionBar_Home = mInflater.inflate(R.layout.tools_action_bar, null);
+                        mTitleTextView = (TextView) CustomActionBar_Home.findViewById(R.id.title_text);
                         mTitleTextView.setText("ALL TOOLS");
+                    }
+
                 else
                     if(position == 2)
+                    {
+                        CustomActionBar_Home = mInflater.inflate(R.layout.tools_action_bar, null);
+                        mTitleTextView = (TextView) CustomActionBar_Home.findViewById(R.id.title_text);
                         mTitleTextView.setText("SETTINGS");
-
-                ImageButton imageButton = (ImageButton) mCustomView
-                        .findViewById(R.id.imageButton);
-                imageButton.setOnClickListener(new View.OnClickListener() {
-
-                    @Override
-                    public void onClick(View view) {
-                        Intent myIntent = new Intent(MainScreen.this, GameBoosterScreen.class);
-                        //myIntent.putExtra("key", value); //Optional parameters
-                        startActivity(myIntent);
-                        overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
                     }
-                });
+                    else
+                    {
+                        CustomActionBar_Home = mInflater.inflate(R.layout.main_screen_action_bar, null);
+                    }
 
-                actionBar.setCustomView(mCustomView);
-                actionBar.setDisplayShowCustomEnabled(true);
+                //actionBar.setCustomView(CustomActionBar_Home);
+                //actionBar.setDisplayShowCustomEnabled(true);
             }
 
             @Override
@@ -86,6 +133,8 @@ public class MainScreen extends AppCompatActivity  {
 
             }
         });
+
+
 
 
 
@@ -306,6 +355,11 @@ public class MainScreen extends AppCompatActivity  {
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         }
+    }
+
+    public void SetCustomActionBars()
+    {
+
     }
 
 

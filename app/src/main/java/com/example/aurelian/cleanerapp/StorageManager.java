@@ -4,6 +4,7 @@ import android.os.Environment;
 import android.os.StatFs;
 
 import java.io.File;
+import java.text.DecimalFormat;
 
 /**
  * Created by Aurelian on 3/19/2017.
